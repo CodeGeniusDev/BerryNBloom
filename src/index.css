@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-primary: #9C2A2A;
+  --color-secondary: #af7df5;
+  --color-text: #1E1E1E;
+  --color-background: #F4F4F4;
+  --color-accent: #9C2A2A;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'League Spartan', sans-serif;
+  background-color: var(--color-background);
+  color: var(--color-text);
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-primary text-white py-2 px-6 rounded-full font-semibold hover:bg-primary/90 transition-all duration-300 shadow-md;
+  }
+  
+  .btn-secondary {
+    @apply bg-secondary text-white py-2 px-6 rounded-full font-semibold hover:bg-secondary/90 transition-all duration-300 shadow-md;
+  }
+  
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+  
+  .form-input {
+    @apply w-full p-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 bg-white;
+  }
+  
+  .form-label {
+    @apply block text-sm font-medium mb-1 text-gray-700;
+  }
+
+  .page-section {
+    @apply py-16 sm:py-20;
+  }
+  
+  .section-title {
+    @apply text-3xl sm:text-4xl font-bold mb-12 text-center text-textColor;
+  }
+}
