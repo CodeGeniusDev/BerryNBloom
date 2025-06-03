@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { CartProvider } from './context/CartContext';
 import { AuthProvider } from './context/AuthContext';
 import Header from './components/Header';
+import ScrollToTop from './components/ScrollToTop';
 import Footer from './components/Footer';
 import Home from './pages/Home';
 import Products from './pages/Products';
@@ -18,12 +19,16 @@ import Orders from './pages/Orders';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import PrivateRoute from './components/PrivateRoute';
+import FAQs from './pages/FAQs';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import TermsAndConditions from './pages/TermsAndConditions';
 
 function App() {
   return (
     <Router>
       <AuthProvider>
         <CartProvider>
+          <ScrollToTop />
           <div className="flex flex-col min-h-screen">
             <Header />
             <main className="flex-grow">
@@ -41,6 +46,9 @@ function App() {
                 <Route path="/about" element={<About />} />
                 <Route path="/our-story" element={<OurStory />} />
                 <Route path="/careers" element={<Careers />} />
+                <Route path="/faqs" element={<FAQs />} />
+                <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
               </Routes>
             </main>
             <Footer />
