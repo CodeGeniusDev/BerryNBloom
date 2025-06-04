@@ -4,6 +4,7 @@ import { ArrowRight } from 'lucide-react';
 import ProductCard from '../components/ProductCard';
 import { getFeaturedProducts } from '../data/products';
 import { motion } from 'framer-motion';
+import OurStoryHome from '../components/OurStoryHome';
 
 const Home: React.FC = () => {
   const featuredProducts = getFeaturedProducts();
@@ -44,7 +45,7 @@ const Home: React.FC = () => {
             <img 
               src="/images/cherry-jam.jpg" 
               alt="Organic cherry jam" 
-              className="rounded-lg shadow-lg w-full h-auto object-cover"
+              className="rounded-lg shadow-2xl w-[550px] h-[500px] object-cover"
             />
             <div className="absolute -bottom-6 -left-6 bg-primary text-white py-3 px-6 rounded-lg bg-burgundy-600 shadow-2xl transform rotate-3 z-10">
               <p className="font-medium text-xl text-white">100% Organic</p>
@@ -86,7 +87,7 @@ const Home: React.FC = () => {
             <img 
               src="/images/orange-jam.jpg" 
               alt="Organic orange jam" 
-              className="rounded-lg shadow-md w-full h-auto object-cover"
+              className="rounded-lg shadow-2xl w-[550px] h-[500px] object-cover"
             />
           </motion.div>
           
@@ -109,6 +110,8 @@ const Home: React.FC = () => {
           </motion.div>
         </div>
       </section>
+
+      <OurStoryHome />
       
       {/* Testimonials */}
       <section className="page-section bg-white">

@@ -8,7 +8,7 @@ export default {
         secondary: '#af7df5',
         accent: '#9C2A2A',
         background: '#F4F4F4',
-        textColor: '#1E1E1E',
+        textColor: '#4D3328',
       },
       fontFamily: {
         sans: ['League Spartan', 'sans-serif'],

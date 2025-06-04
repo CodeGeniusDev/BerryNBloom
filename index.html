@@ -2,32 +2,95 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Highland Gaba Foods offers organic jams, honey, tomato ketchup, vinegar, and mineral water from Gilgit-Baltistan. Shop premium, natural products!" />
+    <meta name="keywords" content="organic jams, honey, tomato ketchup, vinegar, mineral water, Highland Gaba Foods, Gilgit-Baltistan, natural foods" />
+    <meta name="author" content="Highland Gaba Foods" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://www.highlandgabafoods.com" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="Highland Gaba Foods - Organic Jams & Honey" />
+    <meta property="og:description" content="Discover Highland Gaba Foods' organic jams, honey, tomato ketchup, vinegar, and mineral water from Gilgit-Baltistan. Shop natural, healthy products!" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.highlandgabafoods.com" />
+    <meta property="og:image" content="https://www.highlandgabafoods.com/images/og-image.jpg" />
+    <meta property="og:image:alt" content="Highland Gaba Foods organic products" />
+    <meta property="og:site_name" content="Highland Gaba Foods" />
+
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Highland Gaba Foods - Organic Jams & Honey" />
+    <meta name="twitter:description" content="Discover Highland Gaba Foods' organic jams, honey, tomato ketchup, vinegar, and mineral water from Gilgit-Baltistan. Shop natural, healthy products!" />
+    <meta name="twitter:image" content="https://www.highlandgabafoods.com/images/og-image.jpg" />
+    <meta name="twitter:image:alt" content="Highland Gaba Foods organic products" />
+
+    <!-- Preload Google Fonts for Performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <title>Honey & Bloom - Organic Jams & Honey</title>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript>
+      <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    </noscript>
 
-    <!-- Google tag (gtag.js) -->
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-65R629C1V3"
-    ></script>
+    <title>Highland Gaba Foods - Organic Jams & Honey</title>
+
+    <!-- Google Tag Manager -->
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','G-65R629C1V3');
+    </script>
 
-      gtag("config", "G-65R629C1V3");
+    <!-- Schema Markup for Local Business -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Highland Gaba Foods",
+        "description": "Highland Gaba Foods specializes in organic jams, honey, tomato ketchup, vinegar, and mineral water, crafted in Gilgit-Baltistan.",
+        "url": "https://www.highlandgabafoods.com",
+        "logo": "https://www.highlandgabafoods.com/images/logo.png",
+        "image": "https://www.highlandgabafoods.com/images/og-image.jpg",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Opp GB Scouts Headquarter, Minawar",
+          "addressLocality": "Gilgit",
+          "addressRegion": "Gilgit-Baltistan",
+          "addressCountry": "PK"
+        },
+        "telephone": "+92-123-456-7890",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "Customer Service",
+          "telephone": "+92-123-456-7890",
+          "email": "info@highlandgabafoods.com"
+        },
+        "founder": {
+          "@type": "Person",
+          "name": "Feroz Ali Gaba"
+        },
+        "sameAs": [
+          "https://www.facebook.com/highlandgabafoods",
+          "https://www.linkedin.com/company/highland-gaba-foods"
+        ]
+      }
     </script>
   </head>
   <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+      <iframe
+        src="https://www.googletagmanager.com/ns.html?id=G-65R629C1V3"
+        height="0"
+        width="0"
+        style="display:none;visibility:hidden"
+      ></iframe>
+    </noscript>
+
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

@@ -1,7 +1,7 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { Instagram, Facebook, Twitter } from 'lucide-react';
-import { motion } from 'framer-motion';
+import React from "react";
+import { Link } from "react-router-dom";
+import { Instagram, Facebook, Twitter } from "lucide-react";
+import { motion } from "framer-motion";
 
 const Footer: React.FC = () => {
   const year = new Date().getFullYear();
@@ -16,11 +16,18 @@ const Footer: React.FC = () => {
           className="grid grid-cols-1 md:grid-cols-4 gap-8"
         >
           <div className="md:col-span-1">
+              <img
+                src="../../favicon.ico"
+                alt="Berry Bloom"
+                className="w-12 h-12"
+              />
             <Link to="/" className="font-bold text-2xl mb-4 inline-block">
-              <span className="text-primary">Honey</span> & <span className="text-secondary">Bloom</span>
+              <span className="text-primary">Berry</span> &{" "}
+              <span className="text-secondary">Bloom</span>
             </Link>
             <p className="text-gray-600 mb-4 text-sm leading-relaxed">
-              Artisanal organic jams and honey, crafted with love using traditional methods and the finest ingredients.
+              Artisanal organic jams and honey, crafted with love using
+              traditional methods and the finest ingredients.
             </p>
             <div className="flex space-x-4">
               <a
@@ -54,22 +61,34 @@ const Footer: React.FC = () => {
             <h3 className="font-semibold text-lg mb-4 text-gray-900">Shop</h3>
             <ul className="space-y-2">
               <li>
-                <Link to="/products" className="text-gray-600 hover:text-secondary transition-colors text-sm">
+                <Link
+                  to="/products"
+                  className="text-gray-600 hover:text-secondary transition-colors text-sm"
+                >
                   All Products
                 </Link>
               </li>
               <li>
-                <Link to="/products" className="text-gray-600 hover:text-secondary transition-colors text-sm">
+                <Link
+                  to="/products"
+                  className="text-gray-600 hover:text-secondary transition-colors text-sm"
+                >
                   Jams
                 </Link>
               </li>
               <li>
-                <Link to="/products" className="text-gray-600 hover:text-secondary transition-colors text-sm">
+                <Link
+                  to="/products"
+                  className="text-gray-600 hover:text-secondary transition-colors text-sm"
+                >
                   Honey
                 </Link>
               </li>
               <li>
-                <Link to="/products" className="text-gray-600 hover:text-secondary transition-colors text-sm">
+                <Link
+                  to="/products"
+                  className="text-gray-600 hover:text-secondary transition-colors text-sm"
+                >
                   Featured
                 </Link>
               </li>
@@ -77,30 +96,47 @@ const Footer: React.FC = () => {
           </div>
 
           <div>
-            <h3 className="font-semibold text-lg mb-4 text-gray-900">Company</h3>
+            <h3 className="font-semibold text-lg mb-4 text-gray-900">
+              Company
+            </h3>
             <ul className="space-y-2">
               <li>
-                <Link to="/about" className="text-gray-600 hover:text-secondary transition-colors text-sm">
+                <Link
+                  to="/about"
+                  className="text-gray-600 hover:text-secondary transition-colors text-sm"
+                >
                   About Us
                 </Link>
               </li>
               <li>
-                <Link to="/contact" className="text-gray-600 hover:text-secondary transition-colors text-sm">
+                <Link
+                  to="/contact"
+                  className="text-gray-600 hover:text-secondary transition-colors text-sm"
+                >
                   Contact
                 </Link>
               </li>
               <li>
-                <Link to="/privacy-policy" className="text-gray-600 hover:text-secondary transition-colors text-sm">
+                <Link
+                  to="/privacy-policy"
+                  className="text-gray-600 hover:text-secondary transition-colors text-sm"
+                >
                   Privacy Policy
                 </Link>
               </li>
               <li>
-                <Link to="/terms-and-conditions" className="text-gray-600 hover:text-secondary transition-colors text-sm">
+                <Link
+                  to="/terms-and-conditions"
+                  className="text-gray-600 hover:text-secondary transition-colors text-sm"
+                >
                   Terms & Conditions
                 </Link>
               </li>
               <li>
-                <Link to="/faqs" className="text-gray-600 hover:text-secondary transition-colors text-sm">
+                <Link
+                  to="/faqs"
+                  className="text-gray-600 hover:text-secondary transition-colors text-sm"
+                >
                   FAQ
                 </Link>
               </li>
@@ -111,17 +147,26 @@ const Footer: React.FC = () => {
             <h3 className="font-semibold text-lg mb-4 text-gray-900">Help</h3>
             <ul className="space-y-2">
               <li>
-                <Link to="/shipping" className="text-gray-600 hover:text-secondary transition-colors text-sm">
+                <Link
+                  to="/shipping"
+                  className="text-gray-600 hover:text-secondary transition-colors text-sm"
+                >
                   Shipping
                 </Link>
               </li>
               <li>
-                <Link to="/returns" className="text-gray-600 hover:text-secondary transition-colors text-sm">
+                <Link
+                  to="/returns"
+                  className="text-gray-600 hover:text-secondary transition-colors text-sm"
+                >
                   Returns
                 </Link>
               </li>
               <li>
-                <Link to="/contact" className="text-gray-600 hover:text-secondary transition-colors text-sm">
+                <Link
+                  to="/contact"
+                  className="text-gray-600 hover:text-secondary transition-colors text-sm"
+                >
                   Customer Support
                 </Link>
               </li>
