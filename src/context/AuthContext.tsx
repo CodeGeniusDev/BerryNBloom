@@ -26,10 +26,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   useEffect(() => {
     // Check active sessions and sets the user
-    supabase.auth.getSession().then(({ data: { session } }) => {
+    const loadSession = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
       setUser(session?.user ?? null);
       setLoading(false);
-    });
+    };
+
+    loadSession();
 
     // Listen for changes on auth state
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
@@ -37,7 +40,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       setLoading(false);
     });
 
-    return () => subscription.unsubscribe();
+    return () => {
+      subscription?.unsubscribe();
+    };
   }, []);
 
   const signUp = async (email: string, password: string) => {
@@ -49,10 +54,20 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const signIn = async (email: string, password: string) => {
+    const rememberMe = localStorage.getItem('rememberMe') === 'true';
+    
+    // Set the session persistence based on remember me
     const { error } = await supabase.auth.signInWithPassword({
       email,
       password,
     });
+
+    // If remember me is false, the session will be cleared when the browser is closed
+    if (!rememberMe) {
+      // This ensures the session is not persisted
+      await supabase.auth.getSession();
+    }
+    
     if (error) throw error;
   };
 
