@@ -16,8 +16,7 @@ export default defineConfig({
       // Proxy API requests to your backend
       '/api': {
         target: 'http://localhost:3002',
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, '')
+        changeOrigin: true
       }
     }
   },
