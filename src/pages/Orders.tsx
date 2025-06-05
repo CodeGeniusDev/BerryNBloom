@@ -155,3 +155,5 @@ const Orders: React.FC = () => {
     </div>
   );
 };
+
+export default Orders
