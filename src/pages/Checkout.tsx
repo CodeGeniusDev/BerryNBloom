@@ -1,27 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useCart } from '../context/CartContext';
-import { sendOrderEmail } from '../utils/emailService';
+import { useAuth } from '../context/AuthContext';
+import { createOrder, ShippingAddress } from '../lib/orderService';
 import { motion } from 'framer-motion';
+import { Loader2 } from 'lucide-react';
 
-interface CheckoutFormData {
-  firstName: string;
-  lastName: string;
-  email: string;
-  phone: string;
-  address: string;
-  city: string;
-  state: string;
-  zip: string;
-  notes: string;
-}
+interface CheckoutFormData extends ShippingAddress {}
 
 const Checkout: React.FC = () => {
   const { cart, getCartTotal, clearCart } = useCart();
+  const { user } = useAuth();
   const navigate = useNavigate();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   
   const { register, handleSubmit, formState: { errors } } = useForm<CheckoutFormData>();
+  
+  if (!user) {
+    navigate('/login');
+    return null;
+  }
   
   if (cart.length === 0) {
     navigate('/products');
@@ -33,21 +33,37 @@ const Checkout: React.FC = () => {
   const total = subtotal + shipping;
   
   const onSubmit = async (data: CheckoutFormData) => {
-    // Combine form data with cart items
-    const orderData = {
-      customer: data,
-      orderItems: cart,
-      orderTotal: total,
-      orderDate: new Date().toISOString()
-    };
+    setIsSubmitting(true);
+    setError(null);
     
     try {
-      await sendOrderEmail(orderData);
-      clearCart();
-      navigate('/order-confirmation');
+      const orderItems = cart.map(item => ({
+        product_id: item.id,
+        quantity: item.quantity,
+        price: item.price
+      }));
+
+      const order = await createOrder({
+        total,
+        shipping_address: data,
+        items: orderItems
+      });
+
+      // Clear cart after successful order creation
+      await clearCart();
+      
+      // Navigate to order confirmation with order ID
+      navigate('/order-confirmation', { 
+        state: { 
+          orderId: order.id,
+          orderNumber: order.id.slice(0, 8).toUpperCase()
+        } 
+      });
     } catch (error) {
-      console.error('Error submitting order:', error);
-      alert('There was an error processing your order. Please try again.');
+      console.error('Error creating order:', error);
+      setError(error instanceof Error ? error.message : 'Failed to create order. Please try again.');
+    } finally {
+      setIsSubmitting(false);
     }
   };
   
@@ -55,6 +71,13 @@ const Checkout: React.FC = () => {
     <div className="pt-24 pb-16">
       <div className="container-custom max-w-6xl">
         <h1 className="text-3xl font-bold mb-8">Checkout</h1>
+        
+        {error && (
+          <div className="bg-red-50 border border-red-200 text-red-700 rounded-lg p-4 mb-6">
+            <p className="font-medium">Error</p>
+            <p>{error}</p>
+          </div>
+        )}
         
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="grid md:grid-cols-3 gap-8">
@@ -74,10 +97,10 @@ const Checkout: React.FC = () => {
                       id="firstName"
                       type="text"
                       className={`form-input ${errors.firstName ? 'border-red-500' : ''}`}
-                      {...register('firstName', { required: true })}
+                      {...register('firstName', { required: 'First name is required' })}
                     />
                     {errors.firstName && (
-                      <p className="text-red-500 text-xs mt-1">First name is required</p>
+                      <p className="text-red-500 text-xs mt-1">{errors.firstName.message}</p>
                     )}
                   </div>
                   
@@ -87,10 +110,10 @@ const Checkout: React.FC = () => {
                       id="lastName"
                       type="text"
                       className={`form-input ${errors.lastName ? 'border-red-500' : ''}`}
-                      {...register('lastName', { required: true })}
+                      {...register('lastName', { required: 'Last name is required' })}
                     />
                     {errors.lastName && (
-                      <p className="text-red-500 text-xs mt-1">Last name is required</p>
+                      <p className="text-red-500 text-xs mt-1">{errors.lastName.message}</p>
                     )}
                   </div>
                 </div>
@@ -102,13 +125,17 @@ const Checkout: React.FC = () => {
                       id="email"
                       type="email"
                       className={`form-input ${errors.email ? 'border-red-500' : ''}`}
+                      defaultValue={user?.email || ''}
                       {...register('email', { 
-                        required: true, 
-                        pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i 
+                        required: 'Email is required', 
+                        pattern: {
+                          value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                          message: 'Invalid email address'
+                        }
                       })}
                     />
                     {errors.email && (
-                      <p className="text-red-500 text-xs mt-1">Valid email is required</p>
+                      <p className="text-red-500 text-xs mt-1">{errors.email.message}</p>
                     )}
                   </div>
                   
@@ -118,10 +145,10 @@ const Checkout: React.FC = () => {
                       id="phone"
                       type="tel"
                       className={`form-input ${errors.phone ? 'border-red-500' : ''}`}
-                      {...register('phone', { required: true })}
+                      {...register('phone', { required: 'Phone number is required' })}
                     />
                     {errors.phone && (
-                      <p className="text-red-500 text-xs mt-1">Phone number is required</p>
+                      <p className="text-red-500 text-xs mt-1">{errors.phone.message}</p>
                     )}
                   </div>
                 </div>
@@ -132,10 +159,10 @@ const Checkout: React.FC = () => {
                     id="address"
                     type="text"
                     className={`form-input ${errors.address ? 'border-red-500' : ''}`}
-                    {...register('address', { required: true })}
+                    {...register('address', { required: 'Address is required' })}
                   />
                   {errors.address && (
-                    <p className="text-red-500 text-xs mt-1">Address is required</p>
+                    <p className="text-red-500 text-xs mt-1">{errors.address.message}</p>
                   )}
                 </div>
                 
@@ -146,10 +173,10 @@ const Checkout: React.FC = () => {
                       id="city"
                       type="text"
                       className={`form-input ${errors.city ? 'border-red-500' : ''}`}
-                      {...register('city', { required: true })}
+                      {...register('city', { required: 'City is required' })}
                     />
                     {errors.city && (
-                      <p className="text-red-500 text-xs mt-1">City is required</p>
+                      <p className="text-red-500 text-xs mt-1">{errors.city.message}</p>
                     )}
                   </div>
                   
@@ -159,10 +186,10 @@ const Checkout: React.FC = () => {
                       id="state"
                       type="text"
                       className={`form-input ${errors.state ? 'border-red-500' : ''}`}
-                      {...register('state', { required: true })}
+                      {...register('state', { required: 'State is required' })}
                     />
                     {errors.state && (
-                      <p className="text-red-500 text-xs mt-1">State is required</p>
+                      <p className="text-red-500 text-xs mt-1">{errors.state.message}</p>
                     )}
                   </div>
                   
@@ -172,10 +199,10 @@ const Checkout: React.FC = () => {
                       id="zip"
                       type="text"
                       className={`form-input ${errors.zip ? 'border-red-500' : ''}`}
-                      {...register('zip', { required: true })}
+                      {...register('zip', { required: 'ZIP code is required' })}
                     />
                     {errors.zip && (
-                      <p className="text-red-500 text-xs mt-1">ZIP code is required</p>
+                      <p className="text-red-500 text-xs mt-1">{errors.zip.message}</p>
                     )}
                   </div>
                 </div>
@@ -215,13 +242,13 @@ const Checkout: React.FC = () => {
                           className="w-full h-full object-cover"
                         />
                       </div>
-                      <div className="ml-3">
-                        <p className="font-medium">{item.name}</p>
+                      <div className="ml-3 flex-grow">
+                        <p className="font-medium text-sm">{item.name}</p>
                         <p className="text-sm text-gray-500">
                           ${item.price.toFixed(2)} x {item.quantity}
                         </p>
                       </div>
-                      <div className="ml-auto text-right">
+                      <div className="text-right">
                         <p className="font-medium">
                           ${(item.price * item.quantity).toFixed(2)}
                         </p>
@@ -257,9 +284,17 @@ const Checkout: React.FC = () => {
                 
                 <button
                   type="submit"
-                  className="w-full py-3 bg-primary text-white rounded-md font-semibold hover:bg-primary/90 transition-colors"
+                  disabled={isSubmitting}
+                  className="w-full py-3 bg-primary text-white rounded-md font-semibold hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
                 >
-                  Place Order
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                      Processing Order...
+                    </>
+                  ) : (
+                    'Place Order'
+                  )}
                 </button>
               </div>
             </motion.div>
