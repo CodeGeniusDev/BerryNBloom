@@ -16,11 +16,11 @@ const Footer: React.FC = () => {
           className="grid grid-cols-1 md:grid-cols-4 gap-8"
         >
           <div className="md:col-span-1">
-              <img
+              {/* <img
                 src="../../favicon.ico"
                 alt="Berry Bloom"
                 className="w-12 h-12"
-              />
+              /> */}
             <Link to="/" className="font-bold text-2xl mb-4 inline-block">
               <span className="text-primary">Berry</span> &{" "}
               <span className="text-secondary">Bloom</span>
