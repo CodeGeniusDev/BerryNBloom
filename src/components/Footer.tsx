@@ -46,14 +46,6 @@ const Footer: React.FC = () => {
               >
                 <Facebook className="w-5 h-5 text-white" />
               </a>
-              <a
-                href="https://twitter.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 bg-primary rounded-full flex items-center justify-center hover:bg-primary/90 transition-colors"
-              >
-                <Twitter className="w-5 h-5 text-white" />
-              </a>
             </div>
           </div>
 
