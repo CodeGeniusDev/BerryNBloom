@@ -172,12 +172,13 @@ const Footer: React.FC = () => {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="border-t border-gray-200 mt-12 pt-8 text-center text-gray-500 text-sm"
         >
-          <p>© {year} {" "}
+          <p>© {year}
             <Link
             to="/" >
+              {" "}
             Honey & Bloom. 
+              {" "}
             </Link>
-            {" "}
             All rights reserved.</p>
         </motion.div>
       </div>
