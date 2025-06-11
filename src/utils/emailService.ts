@@ -122,7 +122,7 @@ export const sendContactEmail = async (contactData: {
       throw new Error('Failed to send email');
     }
   } catch (error) {
-    console.error('Email service error:', error);
+    console.error('Email service error', error);
     throw error;
   }
 };
