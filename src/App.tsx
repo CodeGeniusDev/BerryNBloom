@@ -25,7 +25,7 @@ import TermsAndConditions from './pages/TermsAndConditions';
 
 function App() {
   return (
-    <Router>
+    <Router> 
       <AuthProvider>
         <CartProvider>
           <ScrollToTop />
