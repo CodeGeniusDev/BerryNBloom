@@ -52,7 +52,7 @@ function App() {
               </Routes>
             </main>
             <Footer
-          </div>
+          </div>  
         </CartProvider>
       </AuthProvider>
     </Router>
