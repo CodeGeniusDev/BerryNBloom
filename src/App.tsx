@@ -55,7 +55,7 @@ function App() {
           </div>  
         </CartProvider>
       </AuthProvider>
-    </Router>
+    </Router>  
   );
 }
 
