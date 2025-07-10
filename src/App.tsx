@@ -9,7 +9,7 @@ import Home from './pages/Home';
 import Products from './pages/Products';
 import ProductDetail from './pages/ProductDetail';
 import Cart from './pages/Cart';
-import Checkout from './pages/Checkout';     
+import Checkout from './pages/Checkout';
 import Contact from './pages/Contact';
 import OrderConfirmation from './pages/OrderConfirmation';
 import About from './pages/About';
