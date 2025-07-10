@@ -51,7 +51,7 @@ function App() {
                 <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
               </Routes>
             </main>
-            <Footer
+            <Footer />
           </div>  
         </CartProvider>
       </AuthProvider>
